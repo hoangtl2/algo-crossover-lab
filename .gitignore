@@ -1,0 +1,35 @@
+# Maven & Java build
+target/
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+
+# IDEs (IntelliJ, VS Code, Eclipse)
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+
+# Python virtual environment & cache
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbsumbs.db
+
+# Dữ liệu lớn (chỉ giữ lại các file mẫu <= 100k và README_DATA.md)
+data/*.bin
+data/*_1m.txt
+data/*_5m.txt
