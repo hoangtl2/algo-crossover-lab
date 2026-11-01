@@ -9,7 +9,13 @@ mkdir -p "$(dirname "$OUT_FILE")"
     echo "       SYSTEM & HARDWARE PROFILE          "
     echo "=========================================="
     echo "Timestamp: $(date -Iseconds)"
-    echo "Kernel/OS: $(uname -a)"
+    echo "OS Release: $(cat /etc/fedora-release 2>/dev/null || uname -o)"
+    echo "Kernel: $(uname -r -m)"
+    echo ""
+    echo "--- CPU Scaling & Power Profile (Fedora) ---"
+    echo "Scaling Driver: $(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver 2>/dev/null || echo 'N/A')"
+    echo "Scaling Governor: $(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 2>/dev/null || echo 'N/A')"
+    echo "Energy Performance Preference: $(cat /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference 2>/dev/null || echo 'N/A')"
     echo ""
     echo "--- CPU Architecture & Cache ---"
     lscpu
@@ -18,7 +24,7 @@ mkdir -p "$(dirname "$OUT_FILE")"
     lscpu -C || true
     echo ""
     echo "--- Core Topology (P-core / E-core & SMT Siblings) ---"
-    lscpu -e=CPU,CORE,SOCKET,NODE,L1d:L1i:L2:L3,MAXMHZ,MINMHZ
+    lscpu -e
     echo ""
     echo "--- Memory Status ---"
     free -h
@@ -27,4 +33,4 @@ mkdir -p "$(dirname "$OUT_FILE")"
     java -version 2>&1
 } > "$OUT_FILE"
 
-echo "[OK] Đã lưu thông tin hệ thống vào $OUT_FILE"
+echo "[OK] Đã lưu thông tin hệ thống Fedora vào $OUT_FILE"
